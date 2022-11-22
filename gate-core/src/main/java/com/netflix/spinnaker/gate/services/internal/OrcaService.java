@@ -107,6 +107,10 @@ public interface OrcaService {
       @Body Map restartDetails);
 
   @Headers("Accept: application/json")
+  @PUT("/pipelines/{id}/reorder")
+  Map reorderWaitingPipeline(@Path("id") String id, @Query("reorderAction") String reorderAction);
+
+  @Headers("Accept: application/json")
   @POST("/orchestrate")
   Map startPipeline(@Body Map pipelineConfig, @Query("user") String user);
 

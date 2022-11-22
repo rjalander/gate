@@ -152,6 +152,11 @@ class PipelineService {
     setApplicationForExecution(executionId)
     orcaServiceSelector.select().restartPipelineStage(executionId, stageId, context)
   }
+  
+  Map reorderWaitingPipeline(String id, String reorderAction) {
+	  setApplicationForExecution(id)
+	  orcaServiceSelector.select().reorderWaitingPipeline(id, reorderAction)
+  }
 
   Map evaluateExpressionForExecution(String executionId, String pipelineExpression) {
     orcaServiceSelector.select().evaluateExpressionForExecution(executionId, pipelineExpression)

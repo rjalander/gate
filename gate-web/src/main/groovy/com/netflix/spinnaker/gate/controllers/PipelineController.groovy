@@ -40,6 +40,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import retrofit.RetrofitError
+import retrofit.http.Query
 
 import static net.logstash.logback.argument.StructuredArguments.value
 
@@ -204,6 +205,12 @@ class PipelineController {
   @PutMapping("/{id}/stages/{stageId}/restart")
   Map restartStage(@PathVariable("id") String id, @PathVariable("stageId") String stageId, @RequestBody Map context) {
     pipelineService.restartPipelineStage(id, stageId, context)
+  }
+  
+  @ApiOperation(value = "Re-order waiting pipeline execution", response = HashMap.class)
+  @PutMapping("{id}/reorder")
+  Map reorderWaitingPipeline(@PathVariable("id") String id, @Query("reorderAction") String reorderAction) {
+	pipelineService.reorderWaitingPipeline(id, reorderAction)
   }
 
   @ApiOperation(value = "Delete a pipeline execution", response = HashMap.class)
